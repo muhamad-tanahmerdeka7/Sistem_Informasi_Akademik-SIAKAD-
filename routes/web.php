@@ -11,29 +11,46 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+// */
+
 
 Route::get('/', function () {
-    return view('pages.app/dashboard-siakad', ['type_menu' => '']);
+    return view('pages.auth.auth-login');
 });
 
-Route::get('/login', function () {
-    return view('pages.auth/auth-login');
-})->name('login');
 
 
-Route::get('/register', function () {
-    return view('pages.auth/auth-register');
-})->name('register');
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/home', function () {
+
+        return view('pages.app.dashboard-siakad', ['type_menu' => '']);
+    })->name('home');
+});
 
 
-Route::get('/forgot', function () {
-    return view('pages.auth.auth-forgot-password');
-})->name('forgot');
+//  ROoute buat web test page
+// Route::get('/', function () {
+//     return view('pages.app/dashboard-siakad', ['type_menu' => '']);
+// });
 
-Route::get('/reset', function () {
-    return view('pages.auth.auth-reset-password');
-})->name('reset');
+// Route::get('/login', function () {
+//     return view('pages.auth/auth-login');
+// })->name('login');
+
+
+// Route::get('/register', function () {
+//     return view('pages.auth/auth-register');
+// })->name('register');
+
+
+// Route::get('/forgot', function () {
+//     return view('pages.auth.auth-forgot-password');
+// })->name('forgot');
+
+// Route::get('/reset', function () {
+//     return view('pages.auth.auth-reset-password');
+// })->name('reset');
 
 // Route::get('/forgot', function () {
 //     return view('pages.auth.auth-forgot-password');

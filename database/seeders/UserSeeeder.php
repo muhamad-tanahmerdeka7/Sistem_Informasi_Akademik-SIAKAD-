@@ -20,6 +20,15 @@ class UserSeeeder extends Seeder
             'email' => 'muhay990@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
+            'roles' => 'admin',
+
+        ]);
+        User::create([
+            'name' => 'mahasiswa',
+            'email' => 'muhay@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'roles' => 'mahasiswa',
 
         ]);
     }

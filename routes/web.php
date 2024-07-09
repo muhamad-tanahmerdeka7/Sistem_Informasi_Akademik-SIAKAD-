@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
 
         return view('pages.app.dashboard-siakad', ['type_menu' => '']);
     })->name('home');
+
+    Route::resource('user', UserController::class);
 });
 
 

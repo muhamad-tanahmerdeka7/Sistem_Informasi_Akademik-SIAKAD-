@@ -16,9 +16,28 @@ class SubjectFactory extends Factory
      */
     public function definition(): array
     {
+
+        // $table->string('title');
+        // $table->bigInteger('lecturer_id')->unsigned();
+        // // smester
+        // $table->string('semesters');
+        // // tahun akademik
+        // $table->string('academic_year');
+        // // sks
+        // $table->integer('sks');
+        // // kode matakuliah
+        // $table->string('code');
+        // // deskripsi
+        // $table->text('description');
         return [
-            'title' => fake()->word(),
-            'lecturer_id' => 3,
+            'title' => $this->faker->sentence(3),
+            'lecturer_id' => \App\Models\User::factory(),
+            // 'semesters' => 'Ganjil',
+            'semesters' => $this->faker->numberBetween(1, 8),
+            'academic_year' => $this->faker->numberBetween(2010, 2020),
+            'sks' => $this->faker->numberBetween(2, 6),
+            'code' => $this->faker->sentence(3),
+            'description' => $this->faker->sentence(3),
         ];
     }
 }

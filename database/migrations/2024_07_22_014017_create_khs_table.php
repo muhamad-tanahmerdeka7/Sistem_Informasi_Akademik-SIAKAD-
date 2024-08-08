@@ -15,12 +15,17 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mahasiswa_id')->constrained('users');
             $table->foreignId('matakuliah_id')->constrained('subjects');
+            $table->string('pertemuan');
             $table->string('nilai');
-            $table->string('grade');
+            $table->string('grade')->nullable();
+            // $table->string('grade')->default('N/A'); // Menambahkan nilai default pada kolom grade
             $table->string('keterangan');
             $table->string('tahun_akademik');
             $table->string('semester');
             $table->string('status');
+            $table->string('kode_absensi');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->string('created_by');
             $table->string('updated_by');
             $table->string('deleted_by')->nullable();

@@ -21,7 +21,7 @@ class UserController extends Controller
                 return $query->where('name', 'like', '%' . $name . '%');
             })
             ->select('id', 'name', 'email', 'phone', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as created_at'))
-            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('pages.users.index', compact('users'));
     }
@@ -36,7 +36,6 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -72,12 +71,20 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'Edit User Successfully');
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(User $user)
     {
+        // Hapus referensi di tabel absensi_matkuls
+        DB::table('absensi_matkuls')->where('mahasiswa_id', $user->id)->delete();
+
+        // Hapus referensi di tabel subjects
+        DB::table('subjects')->where('lecturer_id', $user->id)->delete();
+
+        // Hapus user
         $user->delete();
+
         return redirect()->route('user.index')->with('success', 'Delete User Successfully');
     }
 }

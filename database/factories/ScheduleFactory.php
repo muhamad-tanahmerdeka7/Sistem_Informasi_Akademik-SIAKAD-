@@ -29,6 +29,7 @@ class ScheduleFactory extends Factory
             'created_by' => $this->faker->word,
             'updated_by' => $this->faker->word,
             'deleted_by' => $this->faker->word,
+
         ];
     }
 }

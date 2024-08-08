@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\KhsController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ScheduleController;
+use App\Http\Controllers\Api\AbsensiMatkulController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,13 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 Route::apiResource('schedules', ScheduleController::class)
     ->middleware('auth:sanctum');
+
+
+    // api route for khs with middleware auth
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('khs', KhsController::class);
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('absensi', AbsensiMatkulController::class);
+});

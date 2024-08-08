@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->bigInteger('lecturer_id')->unsigned();
-            // smester
+            // semester
             $table->string('semesters');
             // tahun akademik
             $table->string('academic_year');

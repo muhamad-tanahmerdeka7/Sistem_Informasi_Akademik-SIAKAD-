@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,23 +17,78 @@ use App\Http\Controllers\UserController;
 // */
 
 
+// Route::get('/', function () {
+//     return view('pages.auth.auth-login');
+// });
+
+
+
+// Route::middleware(['auth'])->group(function () {
+
+//     Route::get('/home', function () {
+
+//         return view('pages.app.dashboard-siakad', ['type_menu' => '']);
+//     })->name('home');
+
+//     Route::resource('user', UserController::class);
+// });
+// // resource route subject with midleware
+// Route::middleware(['auth'])->group(function () {
+
+//     Route::resource('subject', SubjectController::class);
+// });
+
+// // resource route schedule with midleware
+// Route::middleware(['auth'])->group(function () {
+
+//     Route::resource('schedule', ScheduleController::class);
+// });
+
+// // make route for generate qrcoede midleware
+// Route::middleware(['auth'])->group(function () {
+
+//     // Route::get('showqrcode', [\App\Http\Controllers\QrCodeController::class, 'showQrcode'])->name('showqrcode');
+//     Route::get('createqrcode', [\App\Http\Controllers\ScheduleController::class, 'createQrcode'])->name('createqrcode');
+//     Route::post('generateqrcode', [\App\Http\Controllers\ScheduleController::class, 'generateQrcode'])->name('generateqrcode');
+// });
+
+// route baru
+
 Route::get('/', function () {
-    return view('pages.auth.auth-login');
+    return view('pages.auth.login', ['type_menu' => '']);
 });
-
-
-
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/home', function () {
-
+    Route::get('home', function () {
         return view('pages.app.dashboard-siakad', ['type_menu' => '']);
     })->name('home');
-
     Route::resource('user', UserController::class);
+    Route::resource('subject', SubjectController::class);
+    Route::resource('schedule', ScheduleController::class);
+    Route::get('createqrcode/{schedule}', [ScheduleController::class, 'createQrcode'])->name('createqrcode');
+    Route::put('generateqrcode/{schedule}', [ScheduleController::class, 'generateQrcode'])->name('generateqrcode');
 });
 
 
+
+
+//get showqrcode
+// Route::get('showqrcode', [\App\Http\Controllers\QrCodeController::class, 'showQrcode'])->name('showqrcode');
+//get schedule createqrcode
+// Route::get('createqrcode', [\App\Http\Controllers\ScheduleController::class, 'createQrcode'])->name('createqrcode');
+
+//post schedule generateqrcode
+// Route::post('generateqrcode', [\App\Http\Controllers\ScheduleController::class, 'generateQrcode'])->name('generateqrcode');
+
+
+
+
+// //get showqrcode
+// Route::get('showqrcode', [\App\Http\Controllers\QrCodeController::class, 'showQrcode'])->name('showqrcode');
+// //get schedule createqrcode
+// Route::get('createqrcode', [\App\Http\Controllers\ScheduleController::class, 'createQrcode'])->name('createqrcode');
+
+// //post schedule generateqrcode
+// Route::post('generateqrcode', [\App\Http\Controllers\ScheduleController::class, 'generateQrcode'])->name('generateqrcode');
 //  ROoute buat web test page
 // Route::get('/', function () {
 //     return view('pages.app/dashboard-siakad', ['type_menu' => '']);
